@@ -1,12 +1,10 @@
-package test;
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class bj15649 {
+public class Main {
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
 		
@@ -17,12 +15,12 @@ public class bj15649 {
 		for(int i=0;i<n;i++) {
 			arr[i]=i+1;
 		}
-		combi(arr, sel, 0, 0);
-		for(int i=0;i<combi.size();i++) {
+		combi(arr, sel, 0, 0);    //조합을 통해서 n개중 m개를 이용해서 만들 수 있는 수 리스트에 저장
+		for(int i=0;i<combi.size();i++) {    //조합을 통해 나온 숫자들의 조합을 다시 순열로 만들어서 저장
 			permu(combi.get(i), 0);
 		}
 		list.sort(null);
-		for(int i=0;i<list.size();i++) {
+		for(int i=0;i<list.size();i++) {    
 			for(int j=0;j<list.get(i).length();j++) {
 				System.out.print(list.get(i).charAt(j)+" ");
 			}
@@ -61,6 +59,7 @@ public class bj15649 {
 			str=sb.toString();
 		}
 	}
+    //StringBuilder를 이용한 문자 스왑
 	static void swap(StringBuilder sb, int a, int b) {
 		char tmp=sb.charAt(a);
 		sb.setCharAt(a, sb.charAt(b));
