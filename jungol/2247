@@ -1,0 +1,61 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class jungol2247 {
+	static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	static class Pair{
+		int start;
+		int end;
+		public Pair(int start, int end) {
+			this.start=start;
+			this.end=end;
+		}
+	}
+	public static void main(String[] args) throws IOException {
+		StringTokenizer token=new StringTokenizer(br.readLine());
+		int N=Integer.parseInt(token.nextToken());
+		List<Pair> list=new ArrayList<>();
+		for(int i=0;i<N;i++) {
+			token=new StringTokenizer(br.readLine());
+			int start=Integer.parseInt(token.nextToken());
+			int end=Integer.parseInt(token.nextToken());
+			list.add(new Pair(start, end));
+		}
+		Collections.sort(list, new Comparator<Pair>() {
+
+			@Override
+			public int compare(Pair o1, Pair o2) {
+				return o1.start-o2.start;
+			}
+		});
+		int blanktime=0;
+		int longtime=0;
+		int s=list.get(0).start;
+		int e=list.get(0).end;
+		for(int i=1;i<list.size();i++) {
+			if(list.get(i).start<=e) {
+				if(e<list.get(i).end)
+					e=list.get(i).end;
+				if(longtime<list.get(i).end-s) {
+					longtime=list.get(i).end-s;
+				}
+			}
+			else if(list.get(i).start>e) {
+				s=list.get(i).start;
+				if(blanktime<list.get(i).start-e) {
+					blanktime=list.get(i).start-e;
+				}
+				if(list.get(i).end>e){
+					e=list.get(i).end;
+				}
+			}
+		}
+		System.out.println((longtime)+" "+(blanktime));
+	}
+}
